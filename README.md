@@ -98,7 +98,7 @@ Ignore peak irregularity at 0 (i.e. sudden drop and then high peak): it is due t
 
 ##### Using left and right cameras for center recovery
 
-![Example of left, center and right camera images for the same time instance] (./examples/left_right.png)
+![Example of left, center and right camera images for the same time instance](./examples/left_right.png)
 
 Dataset is further augmented with left and right cameras with corrected steering angles. As original dataset was collected with smooth center driving, left and right camera augmentation is important for training model for the recovery to the center. See function `steering_correction` in code cell 3. Note that, steering factor depends on the center steering angle but is bounded by 0.15 from below. Overall technique as follows: if center steering angle is to the left, then corrected steering angle for left camera is half of this amount, and for the right - twice the amount; and vice versa. The final histogram is depticted below:
 
