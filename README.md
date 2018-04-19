@@ -66,14 +66,14 @@ As many students suggest, it's much harder to train on the data collected with k
 
 Since, I collected much more data from track 1 with curvatures of big radii, the final dataset is biased towards small steering angles (i.e. -0.5°< ang < 0.5°). In order to normalize the dataset, an upper limit for samples for a steering angle range of 0.04° was set to 200. If number of samples for a steering angle range is above that number, then random 200 is chosen. See code cell 1. Resulting histogram is shown below (ignore the fact that some numbers are above 200. My guess it has to do with the difference between how pyplot builds histogram and how we truncate the dataset):
 
-![Normalized dataset] (./examples/hist_norm.png)
+![Normalized dataset](./examples/hist_norm.png)
 
 ##### 2a. Note on spike at -1.0:
 
 You can observe a spike at -1.0. That has to do with a certain difficult turn that the model couldn't manage to pass properly (see below). IMO, this happened to sudden change of border Texture.
 I decided to specifically generate more data around that turn with high steering angles. As a result, as will be seen in the video, model steers extremely sharp at that turn. This is a clear sign of overfitting (sighs...)
 
-![Hard turn] (./examples/hard_turn.png)
+![Hard turn](./examples/hard_turn.png)
 
 #### 3. Data augmentation 
 
@@ -88,11 +88,11 @@ It can be observed that the histogram is skewed to the left. The reasons are as 
 
 In order to avoid bias to the left dataset is augmented with horizontally flipped copies of original samples (see below). Corresponding steering angles are multiplied by -1 as well. Flipping is done in data generator functions: `train_generator` and `valid_generator` in code cell 3. 
 
-![Example of horizontally flipped copy] (./examples/hor_flip.png)
+![Example of horizontally flipped copy](./examples/hor_flip.png)
 
 The resulting histogram is as follows:
 
-![Histogram after augmentation after flipping] (./examples/hist_flip.png)
+![Histogram after augmentation after flipping](./examples/hist_flip.png)
 
 Ignore peak irregularity at 0 (i.e. sudden drop and then high peak): it is due to the fact that samples with steering angle 0° are assigned to `bin[0:0.04°]` and not to `bin[-0.04°:0]`. 
 
